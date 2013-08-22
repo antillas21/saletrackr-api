@@ -26,4 +26,10 @@ SaletrackrApi::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  # mailer default host
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  # open emails in the browser instead of delivering them
+  config.action_mailer.delivery_method = :letter_opener
 end

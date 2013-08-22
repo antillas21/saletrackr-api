@@ -10,6 +10,20 @@ gem 'figaro'
 # Use sqlite3 as the database for Active Record
 group :development, :test do
   gem 'sqlite3'
+  gem 'letter_opener'
+  gem 'pry-rails'
+  gem 'factory_girl_rails'
+  gem 'timecop'
+  gem 'faker'
+end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
+end
+
+group :development do
+  # gem 'capistrano'
 end
 
 group :production do

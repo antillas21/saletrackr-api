@@ -33,4 +33,10 @@ SaletrackrApi::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
+  # mailer default host
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  # open emails in the browser instead of delivering them
+  config.action_mailer.delivery_method = :letter_opener
 end

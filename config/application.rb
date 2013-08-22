@@ -25,11 +25,22 @@ module SaletrackrApi
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    # Configure sensitive parameters which will be filtered from the log file.
+    config.filter_parameters += [:password, :password_confirmation]
+
     config.middleware.use Rack::Cors do
       allow do
         origins '*'
         resource '*', :headers => :any, :methods => [:get, :post, :options]
       end
+    end
+
+    # test suite config
+    config.generators do |g|
+      g.test_framework :rspec,
+        fixtures: true, view_specs: false, helper_specs: false,
+        routing_specs: false, controller_specs: true, request_specs: false
+      g.fixture_replacement :factory_girl, dir: 'spec/factories'
     end
 
   end
