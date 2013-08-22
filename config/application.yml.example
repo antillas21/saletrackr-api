@@ -1,0 +1,4 @@
+# Add application configuration variables here.
+
+SECRET_KEY_BASE: '832f2041901a182a260844a1e448f7438cae50a6adad6fcb39215a3e4c861a1e1a5d38437793122429541e363d09e2160ae4f436179c3eac610a8f13edec34b4'
+
