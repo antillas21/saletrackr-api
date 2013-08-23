@@ -26,7 +26,7 @@ module SaletrackrApi
     # config.i18n.default_locale = :de
 
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password, :password_confirmation]
+    config.filter_parameters += [:password, :password_confirmation, :token, :authentication_token, :auth_token]
 
     config.middleware.use Rack::Cors do
       allow do
