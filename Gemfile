@@ -6,6 +6,8 @@ gem 'rails', '4.0.0'
 gem 'rails-api'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'figaro'
+gem 'devise', '3.0.2'
+gem 'active_model_serializers'
 
 # Use sqlite3 as the database for Active Record
 group :development, :test do
@@ -20,6 +22,7 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+  gem 'database_cleaner'
 end
 
 group :development do
