@@ -2,7 +2,7 @@ class V1::CustomersController < ApplicationController
   before_action :fetch_resource, except: [:index]
 
   def index
-    @customers = Customer.all
+    @customers = current_user.customers
     respond_with @customers
   end
 
