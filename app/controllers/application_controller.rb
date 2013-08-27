@@ -16,11 +16,50 @@ class ApplicationController < ActionController::API
   end
 
   def authenticate_user!
-    @current_user = User.where(authentication_token: params[:token]).first
-    respond_with({ error: "Token is missing or is invalid." })  unless @current_user
+    if params[:token]
+      @current_user = User.where(authentication_token: params[:token]).first
+      respond_with(
+        {
+          error: "Authentication Token invalid. You must provide a valid authentication token in your request.",
+          kind: 'Authentication Error.'
+          }, status: 401
+      )  unless @current_user
+    else
+      respond_with(
+        {
+          error: 'Authentication Token missing. You must provide an authentication token in your request.',
+          kind: 'Authentication Error.'
+        }, status: 401
+      )
+    end
   end
 
   def current_user
     @current_user
+  end
+
+  def fetch_resource( resource_name )
+    resource = resource_name.to_s.singularize.camelize.constantize.find( params[:id] )
+    if current_user.send(resource_name).include?(resource)
+      @resource = resource
+    else
+      render json: authorization_error_message, status: 403
+    end
+  rescue ActiveRecord::RecordNotFound
+    render json: resource_not_found_error_message, status: 404
+  end
+
+  def authorization_error_message
+    {
+      kind: 'Authorization Error.',
+      error: 'Authorization Failure. You do not have permission to access the resource you requested.'
+    }
+  end
+
+  def resource_not_found_error_message
+    {
+      error: 'Resource Not Found Error. The resource you requested could not be found. It may been removed or you may be using a wrong ID',
+      kind: 'Resource Not Found Error.'
+    }
   end
 end
