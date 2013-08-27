@@ -26,11 +26,11 @@ group :test do
 end
 
 group :development do
-  # gem 'capistrano'
+  gem 'capistrano'
 end
 
 group :production do
-  # gem 'pg'
+  gem 'pg'
   # gem 'mysql2'
 end
 
