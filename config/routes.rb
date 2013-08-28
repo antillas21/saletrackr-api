@@ -6,7 +6,14 @@ SaletrackrApi::Application.routes.draw do
   # root 'welcome#index'
 
   namespace :v1 do
-    resources :customers
+    resources :customers do
+      member do
+        get :statement
+      end
+    end
+    resources :payments
+    resources :sales
+    resources :line_items, path: 'line-items'
   end
 
   # Example of regular route:

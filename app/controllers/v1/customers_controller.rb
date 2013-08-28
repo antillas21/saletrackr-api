@@ -1,5 +1,5 @@
 class V1::CustomersController < ApplicationController
-  before_action :fetch_resource, except: [:index]
+  before_action :fetch_resource, only: [:show, :update, :destroy, :statement]
 
   def index
     @customers = current_user.customers
@@ -12,12 +12,17 @@ class V1::CustomersController < ApplicationController
 
   def update
     @resource.update_attributes(customer_params)
-    respond_with @customer, location: v1_customer_url(@customer)
+    respond_with @resource, location: v1_customer_url(@resource)
   end
 
   def destroy
     @resource.destroy
     head :ok
+  end
+
+  def statement
+    respond_with @resource, serializer: CustomerStatementSerializer,
+      location: statement_v1_customer_url(@resource)
   end
 
   private
