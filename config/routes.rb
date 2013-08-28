@@ -14,6 +14,8 @@ SaletrackrApi::Application.routes.draw do
     resources :payments
     resources :sales
     resources :line_items, path: 'line-items'
+
+    get 'my/settings', to: 'settings#index', as: :my_settings
   end
 
   # Example of regular route:

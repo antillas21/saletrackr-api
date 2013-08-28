@@ -2,5 +2,7 @@
 
 FactoryGirl.define do
   factory :account_setting do
+    language 'en'
+    store_name 'Test Super Store'
   end
 end
