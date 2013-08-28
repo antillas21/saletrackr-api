@@ -1,6 +1,4 @@
 class LineItem < ActiveRecord::Base
-  # attr_accessible :title, :body
-
   validates :name, :qty, :price, presence: true
 
   belongs_to :sale
@@ -15,7 +13,8 @@ class LineItem < ActiveRecord::Base
   end
 
   def calculate_cost_total
-    self.item_cost_total = self.qty * self.cost
+    item_cost = self.cost || 0
+    self.item_cost_total = self.qty * item_cost
   end
 
   def update_sale

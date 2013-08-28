@@ -1,6 +1,4 @@
 class Customer < ActiveRecord::Base
-
-  # attr_accessible :name, :phone, :email, :balance
   before_create :assign_uid
 
   validates :name, presence: true
