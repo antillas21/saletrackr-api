@@ -20,6 +20,11 @@ class V1::PaymentsController < ApplicationController
     head :ok
   end
 
+  def receipt
+    Notifications.payment_receipt( @resource, @resource.customer, current_user ).deliver
+    render json: receipt_message, status: 200
+  end
+
   private
   def fetch_resource
     super(:payments)
@@ -27,5 +32,12 @@ class V1::PaymentsController < ApplicationController
 
   def payment_params
     params.require(:payment).permit(:amount, :customer_id)
+  end
+
+  def receipt_message
+    {
+      message: 'Payment receipt has been queued for delivery.',
+      kind: 'Successful Operation.'
+    }
   end
 end

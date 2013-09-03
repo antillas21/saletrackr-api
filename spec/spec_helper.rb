@@ -4,6 +4,7 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'database_cleaner'
+require 'email_spec'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -42,6 +43,10 @@ RSpec.configure do |config|
 
   # add Requests::JsonHelpers to parse JSON responses automatically
   config.include Requests::JsonHelpers, type: :request
+
+  # add EmailSpec helpers and matchers to requests
+  config.include EmailSpec::Helpers, type: :request
+  config.include EmailSpec::Matchers, type: :request
 
   # add database_cleaner specific configuration
   config.before(:suite) do

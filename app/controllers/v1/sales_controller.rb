@@ -20,6 +20,11 @@ class V1::SalesController < ApplicationController
     head :ok
   end
 
+  def receipt
+    Notifications.sale_receipt( @resource, @resource.customer, current_user ).deliver
+    render json: receipt_message, status: 200
+  end
+
   private
   def fetch_resource
     super(:sales)
@@ -31,4 +36,12 @@ class V1::SalesController < ApplicationController
       line_items_attributes: [:name, :color, :size, :cost, :price, :qty]
     )
   end
+
+  def receipt_message
+    {
+      message: 'Sale receipt has been queued for delivery.',
+      kind: 'Successful Operation.'
+    }
+  end
+
 end

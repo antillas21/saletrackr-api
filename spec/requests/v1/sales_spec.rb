@@ -115,4 +115,11 @@ describe 'Sales API' do
       end
     end
   end
+
+  describe 'RECEIPT' do
+    it 'should deliver the sale receipt email' do
+      Notifications.should_receive(:sale_receipt).with(sale, customer, user)
+      post "/v1/sales/#{sale.id}/receipt", token: token, format: :json
+    end
+  end
 end

@@ -11,8 +11,16 @@ SaletrackrApi::Application.routes.draw do
         get :statement
       end
     end
-    resources :payments
-    resources :sales
+    resources :payments do
+      member do
+        post :receipt
+      end
+    end
+    resources :sales do
+      member do
+        post :receipt
+      end
+    end
     resources :line_items, path: 'line-items'
 
     get 'my/settings', to: 'settings#index', as: :my_settings

@@ -114,4 +114,11 @@ describe 'Payments API' do
       end
     end
   end
+
+  describe 'RECEIPT' do
+    it 'should deliver the payment receipt email' do
+      Notifications.should_receive(:payment_receipt).with(payment, customer, user)
+      post "/v1/payments/#{payment.id}/receipt", token: token, format: :json
+    end
+  end
 end
