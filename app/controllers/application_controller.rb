@@ -20,15 +20,19 @@ class ApplicationController < ActionController::API
       @current_user = User.where(authentication_token: params[:token]).first
       respond_with(
         {
-          error: "Authentication Token invalid. You must provide a valid authentication token in your request.",
-          kind: 'Authentication Error.'
+          error: {
+            message: "Authentication Token invalid. You must provide a valid authentication token in your request.",
+            type: 'Authentication Error.'
+          }
           }, status: 401
       )  unless @current_user
     else
       respond_with(
         {
-          error: 'Authentication Token missing. You must provide an authentication token in your request.',
-          kind: 'Authentication Error.'
+          error: {
+            message: 'Authentication Token missing. You must provide an authentication token in your request.',
+            type: 'Authentication Error.'
+          }
         }, status: 401
       )
     end
@@ -51,15 +55,19 @@ class ApplicationController < ActionController::API
 
   def authorization_error_message
     {
-      kind: 'Authorization Error.',
-      error: 'Authorization Failure. You do not have permission to access the resource you requested.'
+      error: {
+        type: 'Authorization Error.',
+        message: 'Authorization Failure. You do not have permission to access the resource you requested.'
+      }
     }
   end
 
   def resource_not_found_error_message
     {
-      error: 'Resource Not Found Error. The resource you requested could not be found. It may been removed or you may be using a wrong ID',
-      kind: 'Resource Not Found Error.'
+      error: {
+        message: 'Resource Not Found Error. The resource you requested could not be found. It may been removed or you may be using a wrong ID',
+        type: 'Resource Not Found Error.'
+      }
     }
   end
 end
