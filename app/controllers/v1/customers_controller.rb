@@ -21,7 +21,8 @@ class V1::CustomersController < ApplicationController
   end
 
   def statement
-    respond_with @resource, serializer: CustomerStatementSerializer,
+    statement = CustomerStatement.new(@resource)
+    respond_with statement, serializer: CustomerStatementSerializer,
       location: statement_v1_customer_url(@resource)
   end
 

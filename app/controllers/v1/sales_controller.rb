@@ -3,7 +3,8 @@ class V1::SalesController < ApplicationController
 
   def index
     @sales = current_user.sales
-    respond_with @sales.includes(:customer, :line_items), location: v1_sales_url
+    respond_with @sales.includes(:customer, :line_items), 
+      each_serializer: SalesSerializer, location: v1_sales_url
   end
 
   def show

@@ -3,7 +3,7 @@ class V1::PaymentsController < ApplicationController
 
   def index
     @payments = current_user.payments
-    respond_with @payments.includes(:customer), location: v1_payments_url
+    respond_with @payments.includes(:customer), each_serializer: PaymentsSerializer, location: v1_payments_url
   end
 
   def show
