@@ -1,4 +1,5 @@
 class CustomerStatementSerializer < ActiveModel::Serializer
-  attributes :id, :uid, :name, :email, :phone, :balance, :created_at, :updated_at
+  # embed :id, include: true
+  has_one :customer, serializer: CustomerSerializer
   has_many :transactions, serializer: TransactionSerializer
 end
